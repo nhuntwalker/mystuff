@@ -1,0 +1,8 @@
+
+PST,Max TemperatureF,Mean TemperatureF,Min TemperatureF,Max Dew PointF,MeanDew PointF,Min DewpointF,Max Humidity, Mean Humidity, Min Humidity, Max Sea Level PressureIn, Mean Sea Level PressureIn, Min Sea Level PressureIn, Max VisibilityMiles, Mean VisibilityMiles, Min VisibilityMiles, Max Wind SpeedMPH, Mean Wind SpeedMPH, Max Gust SpeedMPH,PrecipitationIn, CloudCover, Events, WindDirDegrees<br />
+2012-11-1,60,56,52,52,51,49,97,87,72,30.02,29.85,29.72,10,10,6,12,4,17,0.34,8,Rain,155<br />
+2012-11-2,60,56,51,52,50,47,96,87,62,30.04,30.01,29.97,10,10,6,6,2,,0.19,7,Rain,139<br />
+2012-11-3,60,56,53,54,52,51,96,89,78,30.18,30.04,29.97,10,10,6,14,5,21,0.02,8,Rain,151<br />
+2012-11-4,64,60,55,59,55,53,97,90,75,30.26,30.21,30.18,10,8,3,14,4,22,0.17,8,Rain,161<br />
+2012-11-5,57,52,48,52,46,41,94,76,53,30.40,30.32,30.17,10,9,3,7,3,,0.05,6,Rain,13<br />
+2012-11-6,57,50,44,51,46,43,97,88,74,30.16,30.04,29.96,10,7,1,21,3,26,0.01,6,,153<br />
