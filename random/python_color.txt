@@ -1,4 +1,0 @@
-Look into Python colormap and fixing hue and saturation.  You downloaded Colormap.py and cubehelix.py.  They're in the directory labeled my_python
-
-Weather Data from: www.wunderground.com
-Got there from: http://hint.fm/wind/
