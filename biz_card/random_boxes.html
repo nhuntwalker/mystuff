@@ -1,0 +1,94 @@
+<html>
+<head>
+<title>Random Boxes</title>
+</head>
+<body>
+
+<svg width="14in" height="8in" xmlns="http://www.w3.org/2000/svg">
+	<desc>Curved paths</desc>
+	<defs>
+		<rect id="refbox" x="0" y="0" width="14in" height="8in" stroke="black" stroke-width="100" fill="none" />
+		<rect id="squares1" x="2" y="2" width="50" height="50" />
+		<rect id="squares2" x="2" y="2" width="80" height="80" />
+		<rect id="squares3" x="2" y="2" width="110" height="110" />
+		<rect id="squares4" x="2" y="2" width="140" height="140" />
+		<rect id="squares5" x="2" y="2" width="170" height="170" />
+		<rect id="squares6" x="2" y="2" width="200" height="200" />
+		<rect id="squares7" x="2" y="2" width="230" height="230" />
+		<rect id="squares8" x="2" y="2" width="260" height="260" />
+	</defs>
+
+	<g id="plot_area">
+		<use xlink:href="#squares1" x="20" y="20" class="test_me" />
+		<use xlink:href="#squares2" x="20" y="20" class="test_me" />
+		<use xlink:href="#squares3" x="20" y="20" class="test_me" />
+		<use xlink:href="#squares4" x="20" y="20" class="test_me" />
+		<use xlink:href="#squares5" x="20" y="20" class="test_me" />
+		<use xlink:href="#squares6" x="20" y="20" class="test_me" />
+		<use xlink:href="#squares7" x="20" y="20" class="test_me" />
+		<use xlink:href="#squares8" x="20" y="20" class="test_me" />
+
+		<use xlink:href="#squares1" x="20" y="20" class="test_me" />
+		<use xlink:href="#squares2" x="20" y="20" class="test_me" />
+		<use xlink:href="#squares3" x="20" y="20" class="test_me" />
+		<use xlink:href="#squares4" x="20" y="20" class="test_me" />
+		<use xlink:href="#squares5" x="20" y="20" class="test_me" />
+		<use xlink:href="#squares6" x="20" y="20" class="test_me" />
+		<use xlink:href="#squares7" x="20" y="20" class="test_me" />
+		<use xlink:href="#squares8" x="20" y="20" class="test_me" />
+
+		<use xlink:href="#squares1" x="20" y="20" class="test_me" />
+		<use xlink:href="#squares2" x="20" y="20" class="test_me" />
+		<use xlink:href="#squares3" x="20" y="20" class="test_me" />
+		<use xlink:href="#squares4" x="20" y="20" class="test_me" />
+		<use xlink:href="#squares5" x="20" y="20" class="test_me" />
+		<use xlink:href="#squares6" x="20" y="20" class="test_me" />
+		<use xlink:href="#squares7" x="20" y="20" class="test_me" />
+		<use xlink:href="#squares8" x="20" y="20" class="test_me" />
+
+		<!-- Bounding Box -->
+		<use xlink:href="#refbox"/>
+	</g>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<script>
+	var square = document.getElementsByClassName('test_me'),
+		plot_area = document.getElementById('plot_area'),
+		coord_x,
+		coord_y,
+		size,
+		blues = ['#225533','#44bbcc','#88dddd','#bbeeff','#0055bb',
+		'#334433','#6699aa','#88aaaa','#aacccc','#447799',
+		'#225533','#44bbcc','#88dddd','#bbeeff','#0055bb',
+		'#334433','#6699aa','#88aaaa','#aacccc','#447799',
+		'#225533','#44bbcc','#88dddd','#bbeeff','#0055bb',
+		'#334433','#6699aa','#88aaaa','#aacccc','#447799',
+		'#225533','#44bbcc','#88dddd','#bbeeff','#0055bb',
+		'#334433','#6699aa','#88aaaa','#aacccc','#447799'],
+
+		reds = ['#442222','#aa3333','#cc4433','#ee6633','#ffee55',
+		'#661111','#dd1100','#ff0000','#ff4400','#ffff00',
+		'#442222','#aa3333','#cc4433','#ee6633','#ffee55',
+		'#661111','#dd1100','#ff0000','#ff4400','#ffff00',
+		'#442222','#aa3333','#cc4433','#ee6633','#ffee55',
+		'#661111','#dd1100','#ff0000','#ff4400','#ffff00',
+		'#442222','#aa3333','#cc4433','#ee6633','#ffee55',
+		'#661111','#dd1100','#ff0000','#ff4400','#ffff00'];
+
+
+	for (var ii=0; ii < square.length; ii++) {
+		coord_x = Math.random()*1300;
+		coord_y = Math.random()*800;
+		size = Math.random()*100;
+		square[ii].setAttribute('x', coord_x);
+		square[ii].setAttribute('y', coord_y);
+		square[ii].setAttribute('fill',reds[ii]);
+	};
+
+	// plot_area.append();
+
+</script>
+</svg>
+</body>
+</html>
