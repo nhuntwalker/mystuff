@@ -76,8 +76,8 @@ sigma = np.sqrt(np.diag(MSE))
 # Plot the gaussian process
 #  gaussian process allows computation of the error at each point
 #  so we will show this as a shaded region
-fig = plt.figure(figsize=(5, 10))
-fig.subplots_adjust(left=0.1, right=0.95, bottom=0.1, top=0.95)
+fig = plt.figure(figsize=(5, 5))
+fig.subplots_adjust(left=0.1, right=0.95, bottom=0.1, top=0.95, hspace=0)
 ax = fig.add_subplot(211)
 
 ax.plot(z, mu_true, '--k')
@@ -87,10 +87,11 @@ ax.fill_between(z_fit, y_pred_sk - 1.96 * sigma_sk, y_pred_sk + 1.96 * sigma_sk,
                 alpha=0.2, color='b', label='95% confidence interval')
 
 ax.text(0.9, 0.1, "Gaussian Process from sklearn", transform=ax.transAxes, horizontalalignment="right")
-ax.set_xlabel('$z$')
+# ax.set_xlabel('$z$')
 ax.set_ylabel(r'$\mu$')
 
 ax.set_xlim(0, 2)
+ax.set_xticklabels([])
 ax.set_ylim(36, 48)
 
 ax = fig.add_subplot(212)
