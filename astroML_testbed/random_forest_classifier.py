@@ -94,7 +94,6 @@ ax.text(0.02, 0.02, "depth = %i" % depths[1],
 # right plot: completeness/contamination vs N colors
 # first: completeness vs Ncolors
 ax = fig.add_subplot(222)
-ax = fig.add_subplot(222)
 ax.plot(Ncolors, completeness[0], 'o-k', ms=6, label="depth=%i" % depths[0])
 ax.plot(Ncolors, completeness[1], '^--k', ms=6, label="depth=%i" % depths[1])
 
