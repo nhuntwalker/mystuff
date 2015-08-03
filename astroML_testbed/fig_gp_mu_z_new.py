@@ -68,7 +68,7 @@ print("theta:", gp_sk.theta_)
 #------------------------------------------------------------
 # using george
 gp = george.GP(ExpSquaredKernel(0.5/1e-2))
-gp.compute(z_sample, (dmu/mu_sample)**2)
+gp.compute(z_sample, dmu)
 y_pred, MSE = gp.predict(mu_sample, z_fit)
 sigma = np.sqrt(np.diag(MSE))
 
@@ -99,8 +99,10 @@ ax = fig.add_subplot(212)
 ax.plot(z, mu_true, '--k')
 ax.errorbar(z_sample, mu_sample, dmu, fmt='.k', ecolor='gray', markersize=6)
 ax.plot(z_fit, y_pred, '-k')
-ax.fill_between(z_fit, y_pred - 4000 * sigma, y_pred + 4000 * sigma,
+ax.fill_between(z_fit, y_pred - 1.96 * sigma, y_pred + 1.96 * sigma,
                 alpha=0.2, color='r', label='95% confidence interval')
+# ax.fill_between(z_fit, y_pred - 4000 * sigma, y_pred + 4000 * sigma,
+#                 alpha=0.2, color='r', label='95% confidence interval')
 
 ax.text(0.9, 0.1, "Gaussian Process from george", transform=ax.transAxes, horizontalalignment="right")
 ax.set_xlabel('$z$')
@@ -109,5 +111,5 @@ ax.set_ylabel(r'$\mu$')
 ax.set_xlim(0, 2)
 ax.set_ylim(36, 48)
 
-plt.savefig("/Users/Nick/Documents/my_python/mystuff/astroML_testbed/fig_gp_mu_z.pdf")
+plt.savefig("/Users/Nick/Documents/my_python/mystuff/astroML_testbed/fig_gp_mu_z_proper.pdf")
 plt.show()
