@@ -68,7 +68,7 @@ print("theta:", gp_sk.theta_)
 #------------------------------------------------------------
 # using george
 gp = george.GP(ExpSquaredKernel(0.5/1e-2))
-gp.compute(z_sample, dmu)
+gp.compute(z_sample, (dmu/mu_sample)**2)
 y_pred, MSE = gp.predict(mu_sample, z_fit)
 sigma = np.sqrt(np.diag(MSE))
 
@@ -111,5 +111,5 @@ ax.set_ylabel(r'$\mu$')
 ax.set_xlim(0, 2)
 ax.set_ylim(36, 48)
 
-plt.savefig("/Users/Nick/Documents/my_python/mystuff/astroML_testbed/fig_gp_mu_z_proper.pdf")
+# plt.savefig("/Users/Nick/Documents/my_python/mystuff/astroML_testbed/fig_gp_mu_z_proper.pdf")
 plt.show()
