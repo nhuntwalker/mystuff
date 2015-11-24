@@ -1,0 +1,8 @@
+{
+"sun" : ["hydrogen", "fusion", "nuclear", "star", "sphere"],
+"earth" : ["planet", "atmosphere", "human", "life", "water"],
+"moon" : ["satellite", "earth", "capture", "form", "orbit"],
+"galaxy" : ["stars", "dust", "gas", "disk", "elliptical"],
+"photon" : ["atom", "electromagnetic", "wavelength", "speed", "frequency"],
+"relativity" : ["speed", "dilation", "Einstein", "twin", "contraction"]
+}
