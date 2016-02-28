@@ -28,7 +28,9 @@ def split_keywords(keywords):
     try:
         keywords = keywords.replace(u'\u201c', '"').replace(u'\u201d', '"')\
             .replace("-", " ")
+
     except AttributeError:
+        # In the event that keywords = nan
         return []
 
     if '"' in keywords:
@@ -74,6 +76,7 @@ def get_synonyms(word):
     """
     syns_sets = wordnet.synsets(word)
     if syns_sets:
+        # if there's synonyms, take the first set
         desired = syns_sets[0].lemma_names()
         desired = [the_name.replace("_", " ") for the_name in desired]
         return desired
@@ -92,11 +95,13 @@ def match_keywords_descriptions(input_company):
 
     Return a dataframe of matches.
     """
-
     company = input_company["name"]
     key_list = input_company["key_list"]
 
     if key_list == []:
+        # if there's no key words, then just pull apart the description.
+        # kill any words that are generic amongst all descriptions. we want to
+        # get something close to being a key word without having key words
         stop = stopwords.words("english")
         too_generic = ["developer", "provider", "operator", "owner", 
                        "manufacturer", "manufactures", "company"]
@@ -118,6 +123,7 @@ def match_keywords_descriptions(input_company):
         [word in x for word in key_list] != [False for word in key_list])) \
         & (company_data.name != company)]
 
+    # add columns for keyword and synonym metrics
     keyword_matches["match_fraction"] = \
         keyword_matches.key_list.map(lambda x: \
         sum([word in x for word in key_list])/float(len(key_list)))
@@ -136,13 +142,17 @@ def strip_clean_stem_description(text, stemmer):
     Take the text, strip of extra white space, kill non-alphanumeric characters,
     strip any resulting whitespace, return cleaned text
     """
+    # no damn hyphens!
     text = text.strip().replace("-"," ")
 
     kill_nonalpha = re.compile("[\W]+")
+    # need to get rid of any stray "s" from killing apostrophes
     text = kill_nonalpha.sub(" ", text).replace(" s ", " ").strip()
 
     reduce_whitespace = re.compile("[\s{2,}]+")
     text = reduce_whitespace.sub(" ", text)
+    # reduce text to nigh-unintelligible word stems to account for tenses and
+    # word pluralities. Looking to search, not be pretty.
     text = " ".join([stemmer.stem(word) for word in text.split(" ")])
 
     return text
@@ -150,7 +160,7 @@ def strip_clean_stem_description(text, stemmer):
 
 def calculate_cosine_dist(main_text, new_text):
     """
-    Calculate and return the cosine distance between two strings
+    Calculate and return the cosine distance between two strings.
     """
     wordbag = set(" ".join([main_text, new_text]).split(" "))
     dot_prod = 0
@@ -159,6 +169,7 @@ def calculate_cosine_dist(main_text, new_text):
 
     for word in wordbag:
         if word in main_text and word in new_text:
+            # only worth looking at if word is in both. Otherwise dot prod = 0
             count_A = sum(np.array(main_text) == word)
             count_B = sum(np.array(new_text) == word)
             dot_prod += count_A * count_B
@@ -176,13 +187,13 @@ def search_descriptions(companies, main_company, top_count=5):
     main_company_desc = strip_clean_stem_description(main_company.desc, stemmer)
     distances = {"name":[], "distance":[]}
 
-    ## If description is basically nothing
+    # If description is basically nothing
     if ("undisclosed" in main_company.desc) or ("stealth" in main_company.desc):
-        ## No keywords either? No search can be done
+        # No keywords either? No search can be done
         if pd.isnull(main_company.keywords):
             return None
 
-        ## No description but had keywords? I can use that
+        # No description but had keywords? I can use that
         else:
             return list(companies.sort_values(by="match_fraction", 
                                          ascending=0)[:top_count]["name"])
@@ -191,11 +202,14 @@ def search_descriptions(companies, main_company, top_count=5):
         for ii in range(len(companies)):
             company = companies.iloc[ii]
             company_desc = strip_clean_stem_description(company.desc, stemmer)
+            # Getting cosine distance between two descriptions
             dist = calculate_cosine_dist(main_company_desc, company_desc)
             distances["name"].append(company["name"])
+            # Synonyms shouldn't be as important as straight keywords.
             weight = company["match_fraction"] + 0.5 * company["syn_match_frac"]
             distances["distance"].append(dist * weight)
 
+        # the higher the distance, the better the match
         distances = pd.DataFrame(distances).sort_values(by="distance", 
                                                         ascending=0)
         if len(distances) > top_count:
