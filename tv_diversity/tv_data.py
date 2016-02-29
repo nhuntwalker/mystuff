@@ -114,4 +114,4 @@ for show in shows:
     if "page_file" in show.keys():
         show = add_imdb_link(show)
 
-
+# Next step: explore IMDB
