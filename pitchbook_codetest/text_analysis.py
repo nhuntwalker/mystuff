@@ -1,13 +1,13 @@
-# Searching for Companies with Companies
-# Author: Nicholas Hunt-Walker
-# Date Started: February 26, 2016
-
 """
 Write an algorithm that takes a company name and
 returns a list of names of similar companies. For example if I search "Uber", I
 would expect to get something like the following list: ["Lyft", "SideCar",
 "Curb", ...] where the most similar companies are at the top of the list.
 """
+
+# Searching for Companies with Companies
+# Author: Nicholas Hunt-Walker
+# Date Started: February 26, 2016
 
 import pandas as pd 
 from nltk.corpus import wordnet, stopwords
