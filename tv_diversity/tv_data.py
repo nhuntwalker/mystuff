@@ -9,6 +9,7 @@ import os
 import re
 from bs4 import BeautifulSoup
 import urllib
+import json
 # get the wikipedia page for list of american TV series
 # os.system('curl https://en.wikipedia.org/wiki/List_of_American_television_series > tv_series_list.html')
 
@@ -110,8 +111,11 @@ def add_imdb_link(show):
 
 shows = parse_wiki_tvlist(all_tv)
 for show in shows:
-    download_show_wiki_page(show)
+    # download_show_wiki_page(show) ## This is done already. No need to do again
     if "page_file" in show.keys():
         show = add_imdb_link(show)
+
+with open("all_shows.txt", "w") as outfile:
+    json.dump(shows, outfile)
 
 # Next step: explore IMDB
